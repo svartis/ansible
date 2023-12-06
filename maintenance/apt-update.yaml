@@ -1,0 +1,11 @@
+---
+- name: Update and upgrade apt packages
+  hosts: "{{ hosts }}"
+  tasks:
+    - name: Update APT package manager repositories cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade packages to the latest version
+      apt:
+        upgrade: dist
