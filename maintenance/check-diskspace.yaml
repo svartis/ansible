@@ -12,7 +12,7 @@
 
     - name: send discord message when disk space is over 0%
       uri:
-        url: {{ discord_webhook }}
+        url: "{{ discord_webhook }}"
         method: POST
         body_format: json
         body: '{"content": "Disk space on {{ inventory_hostname }} is above 0%!"}'
