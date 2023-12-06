@@ -1,13 +1,12 @@
 ---
 - name: Update and upgrade apt packages
+  become: true
   hosts: all
   tasks:
     - name: Update APT package manager repositories cache
-      become: true
       apt:
         update_cache: yes
 
     - name: Upgrade packages to the latest version
-      become: true
       apt:
         upgrade: dist
