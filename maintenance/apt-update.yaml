@@ -1,6 +1,7 @@
 ---
 - name: Update and upgrade apt packages
-  hosts: "{{ hosts }}"
+  hosts: all
+  become: true
   tasks:
     - name: Update APT package manager repositories cache
       apt:
