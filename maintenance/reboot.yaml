@@ -1,0 +1,28 @@
+---
+- name: Reboot server
+  hosts: all
+  become: yes
+  tasks:
+    - name: send discord message before reboot
+      uri:
+        url: "{{ discord_webhook }}"
+        method: POST
+        body_format: json
+        body: '{"content": "Reboot of {{ inventory_hostname }} starting!"}'
+        headers:
+          Content-Type: application/json
+        status_code: 204
+
+    - name: Reboot server
+      reboot:
+        reboot_timeout: 3600
+
+    - name: send discord message when reboot is done
+      uri:
+        url: "{{ discord_webhook }}"
+        method: POST
+        body_format: json
+        body: '{"content": "Reboot of {{ inventory_hostname }} is done!"}'
+        headers:
+          Content-Type: application/json
+        status_code: 204
